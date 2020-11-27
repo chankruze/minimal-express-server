@@ -54,6 +54,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", require("./routes/sample"));
+app.use("/file", require("./routes/fileops"));
 
 // Print sevrer IP
 const networkInterfaces = os.networkInterfaces();
