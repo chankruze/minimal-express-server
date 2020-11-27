@@ -75,7 +75,6 @@ router.get("/download", (req, res) => {
   const { fileName } = req.query;
 
   if (fileName) {
-    console.log(fileName);
     const filePath = path.resolve(__dirname, "../temp/", fileName);
     return res.sendFile(filePath);
   }
@@ -83,6 +82,46 @@ router.get("/download", (req, res) => {
   return res.status(500).json({
     status: "failed",
   });
+});
+
+router.post("/delete", (req, res) => {
+  // if API key don't matches (or not found in the DB [prod])
+  // return unauthorized status
+  if (req.headers["x-cproxy-api-key"] !== process.env.API_KEY) {
+    return res.status(401).json({
+      status: "failed",
+      msg: "request unauthorized",
+    });
+  }
+
+  // if content-type is not json
+  // return bad request status
+  if (req.headers["content-type"] !== "application/json") {
+    return res.status(400).json({
+      status: "failed",
+      msg: "only json data allowed",
+    });
+  }
+
+  const { fileName } = req.body;
+
+  if (fileName) {
+    const filePath = path.resolve(__dirname, "../temp/", fileName);
+    utils
+      .deleteFile(filePath)
+      .then(() => {
+        return res.status(200).json({
+          status: "ok",
+          msg: `deleted ${fileName} from server`,
+        });
+      })
+      .catch((err) => {
+        return res.status(500).json({
+          status: "failed",
+          msg: `unable to delete ${fileName}`,
+        });
+      });
+  }
 });
 
 module.exports = router;

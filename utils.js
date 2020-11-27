@@ -50,9 +50,21 @@ const downloadFile = async (fileUrl, outputLocationPath) => {
   });
 };
 
+const deleteFile = async (filePath) => {
+  fs.unlink(filePath, (err) => {
+    if (err) {
+      console.error(err);
+      return false;
+    }
+  });
+
+  return true;
+};
+
 module.exports = Object.freeze({
   isDevEnv,
   isEmpty,
   isBlank,
   downloadFile,
+  deleteFile,
 });
