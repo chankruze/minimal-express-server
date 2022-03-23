@@ -22,6 +22,8 @@ router.post('/add', (req, res) => {
       throw new Error('Title and content are not provided')
     }
 
+    // TODO: add lesson to db
+
     return res.status(201).json({
       message: 'Lesson added successfully'
     })
