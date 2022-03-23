@@ -1,0 +1,17 @@
+/*
+Author: chankruze (chankruze@geekofia.in)
+Created: Sun Feb 13 2022 15:31:00 GMT+0530 (India Standard Time)
+
+Copyright (c) geekofia 2022 and beyond
+*/
+
+import app from './App'
+import { banner } from './utils'
+
+let port: number = parseInt(process.env.PORT) || 6767
+
+app.listen(port, banner(port)).on('error', (err) => {
+  if (err.message.includes('EADDRINUSE')) {
+    return app.listen(++port, banner(port))
+  }
+})
