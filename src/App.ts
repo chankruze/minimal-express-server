@@ -14,19 +14,25 @@ import rootRoutes from './routes'
 import lessonRoutes from './routes/lesson'
 
 class App {
-  public app;
+  public app
 
-  constructor () {
+  constructor() {
     this.app = express()
     this.useMiddlewares()
     this.mountRoutes()
   }
 
-  private useMiddlewares (): void {
-    this.app.use(helmet(), cors(), morgan('dev'), express.json())
+  private useMiddlewares(): void {
+    this.app.use(
+      helmet(),
+      cors(),
+      morgan('dev'),
+      express.json(),
+      express.urlencoded({ extended: false })
+    )
   }
 
-  private mountRoutes (): void {
+  private mountRoutes(): void {
     // mount routes
     this.app.use('/', rootRoutes)
     this.app.use('/lesson', lessonRoutes)
