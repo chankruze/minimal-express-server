@@ -6,7 +6,7 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import * as express from 'express'
-import lessons from '../../data/lesssons'
+import lessons from '../data/lesssons'
 
 const router = express.Router()
 

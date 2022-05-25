@@ -2,7 +2,7 @@
   "name": "ed-tech-cms-api",
   "version": "1.0.0",
   "description": "CMS backend API for EdTech startup",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest --coverage",
     "prestart": "npm install && npm run build",
