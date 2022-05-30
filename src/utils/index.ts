@@ -5,7 +5,7 @@ Created: Sun Feb 13 2022 19:05:12 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import * as os from 'os'
+import os from 'os'
 
 export const getNetWorkUrl = () => {
   const networkInterfaces = os.networkInterfaces()
