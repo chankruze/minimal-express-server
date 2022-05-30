@@ -1,7 +1,7 @@
 {
-  "name": "ed-tech-cms-api",
+  "name": "minimal-express-server",
   "version": "1.0.0",
-  "description": "CMS backend API for EdTech startup",
+  "description": "backend API server for any project",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest --coverage",
@@ -15,15 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chankruze/ed-tech-cms-api.git"
+    "url": "git+https://github.com/chankruze/minimal-express-server.git"
   },
   "keywords": [],
   "author": "chankruze <chankruze@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chankruze/ed-tech-cms-api/issues"
+    "url": "https://github.com/chankruze/minimal-express-server/issues"
   },
-  "homepage": "https://github.com/chankruze/ed-tech-cms-api#readme",
+  "homepage": "https://github.com/chankruze/minimal-express-server#readme",
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.14.0",
