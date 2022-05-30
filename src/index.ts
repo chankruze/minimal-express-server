@@ -5,7 +5,7 @@ Created: Sun Feb 13 2022 15:31:00 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import * as dotenv from 'dotenv'
+import dotenv from 'dotenv'
 import app from './App'
 import { MongoClient, MongoClientOptions } from 'mongodb'
 import { banner } from './utils'

@@ -5,13 +5,12 @@ Created: Sun Feb 13 2022 15:31:12 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import * as express from 'express'
-import * as cors from 'cors'
-import * as morgan from 'morgan'
+import express from 'express'
+import cors from 'cors'
+import morgan from 'morgan'
 import helmet from 'helmet'
 // routes
 import rootRoutes from './routes'
-import lessonRoutes from './routes/lesson'
 
 class App {
   public app
@@ -35,7 +34,6 @@ class App {
   private mountRoutes (): void {
     // mount routes
     this.app.use('/', rootRoutes)
-    this.app.use('/lesson', lessonRoutes)
   }
 }
 

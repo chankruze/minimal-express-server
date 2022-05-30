@@ -3,8 +3,11 @@
     "target": "es6",
     "module": "commonjs",
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["dist", "src/data", "node_modules"]
+  "exclude": ["dist", "src/data", "node_modules"],
+  "lib": ["esnext"]
 }
