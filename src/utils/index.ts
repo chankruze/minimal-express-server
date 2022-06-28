@@ -9,7 +9,21 @@ import os from 'os'
 
 export const getNetWorkUrl = () => {
   const networkInterfaces = os.networkInterfaces()
-  return networkInterfaces.eth0[0].address
+
+  const validInterfaceKeys = Object.keys(networkInterfaces).filter(
+    (nic) => !nic.toLowerCase().includes('loopback')
+  )
+
+  const validInterfaces = Object.values(
+    networkInterfaces[validInterfaceKeys[0]]
+  ).filter(
+    (alias) =>
+      alias.family === 'IPv4' &&
+      alias.address !== '127.0.0.1' &&
+      !alias.internal
+  )
+
+  return validInterfaces[0].address || '0.0.0.0'
 }
 
 export const isDevEnv = () => process.env.NODE_ENV === 'development'
