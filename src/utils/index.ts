@@ -11,7 +11,7 @@ export const getNetWorkUrl = () => {
   const networkInterfaces = os.networkInterfaces()
 
   const validInterfaceKeys = Object.keys(networkInterfaces).filter(
-    (nic) => !nic.toLowerCase().includes('loopback')
+    (nic) => !nic.toLowerCase().includes('lo')
   )
 
   const validInterfaces = Object.values(
