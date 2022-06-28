@@ -9,6 +9,7 @@ import dotenv from 'dotenv'
 import app from './App'
 import { MongoClient, MongoClientOptions } from 'mongodb'
 import { banner } from './utils'
+// import UsersDAO from './dao/usersDAO'
 
 // import env variables
 dotenv.config()
@@ -43,6 +44,7 @@ if (!process.env.DB_URI) {
     .then(async (client) => {
       console.log('Connected to MongoDB 🔥🔥🔥')
       // TODO: inject mongo client
+      // UsersDAO.injectDB()
       // start listening on port
       app.listen(port, banner(port)).on('error', (err) => {
         if (err.message.includes('EADDRINUSE')) {
