@@ -8,6 +8,6 @@
     "moduleResolution": "node"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["dist", "src/data", "node_modules"],
+  "exclude": ["dist", "src/data", "node_modules", "./src/**/*.spec.ts"],
   "lib": ["esnext"]
 }
