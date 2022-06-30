@@ -15,4 +15,14 @@ router.get('/', (req, res) => {
   })
 })
 
+router.get('/random/:min/:max', (req, res) => {
+  const [min, max] = Object.keys(req.params).map((k) => parseInt(req.params[k]))
+
+  const randomNo = Math.floor(Math.random() * (max - min + 1) + min)
+
+  res.json({
+    randomNo
+  })
+})
+
 export default router
