@@ -7,7 +7,7 @@
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
     "prestart": "npm install && npm run build",
     "start": "node dist/index.js",
-    "build": "npm run lint && tsc",
+    "build": "npm run lint && rimraf dist && tsc",
     "predev": "npm run build",
     "dev": "cross-env NODE_ENV='development' concurrently \"tsc --watch\" \"nodemon dist/index.js\"",
     "lint": "eslint . --ext .ts --fix",
