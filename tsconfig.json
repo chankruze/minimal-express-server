@@ -5,9 +5,9 @@
     "outDir": "dist",
     "sourceMap": true,
     "esModuleInterop": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "lib": ["esnext"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["dist", "src/data", "node_modules", "./src/**/*.spec.ts"],
-  "lib": ["esnext"]
+  "exclude": ["dist", "src/data", "node_modules", "./src/**/*.spec.ts"]
 }
