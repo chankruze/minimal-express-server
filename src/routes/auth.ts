@@ -71,14 +71,14 @@ router.post('/signin', async (req: Request, res: Response) => {
         },
         process.env.JWT_SECRET,
         {
-          expiresIn: 1000 * 10
+          expiresIn: 1000 * 60 * 10
         }
       )
 
       // attach the jwt token to the response cookie
       res
         .cookie('mes-user', token, {
-          maxAge: 1000 * 10,
+          maxAge: 1000 * 60 * 10,
           httpOnly: true,
           signed: true,
           secure: process.env.NODE_ENV === 'production'

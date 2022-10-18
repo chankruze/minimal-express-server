@@ -16,6 +16,13 @@ import { iam } from './middlewares/iam'
 import authRoutes from './routes/auth'
 import userRoutes from './routes/user'
 
+// update this according to the frontend to be able to
+// store the cookie to localstorage with axios
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  credentials: true
+}
+
 class App {
   public app
 
@@ -28,7 +35,7 @@ class App {
   private useMiddlewares (): void {
     this.app.use(
       helmet(),
-      cors(),
+      cors(corsOptions),
       morgan('dev'),
       express.json(),
       express.urlencoded({ extended: false }),
