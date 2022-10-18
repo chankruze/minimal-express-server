@@ -11,16 +11,26 @@ const prisma = new PrismaClient()
 
 const userData: Prisma.UserCreateInput[] = [
   {
-    name: 'John Doe',
     email: 'john.doe@mes.com',
-    password: '123',
-    role: 'admin'
+    password: '$2a$12$M.DPr3ktx3YTA1//byp9ieo.nr.cYsh7hGdt38T/5y5DaKLP6dhDu', // 123
+    role: 'admin',
+    profile: {
+      create: {
+        name: 'John Doe',
+        bio: '🤴🏻Maa Ka Magarmachh 😎'
+      }
+    }
   },
   {
-    name: 'Jane Doe',
     email: 'jane.doe@mes.com',
-    password: '123',
-    role: 'user'
+    password: '$2a$12$M.DPr3ktx3YTA1//byp9ieo.nr.cYsh7hGdt38T/5y5DaKLP6dhDu', // 123
+    role: 'user',
+    profile: {
+      create: {
+        name: 'Jane Doe',
+        bio: '😘Papa KI Paree👰'
+      }
+    }
   }
 ]
 
