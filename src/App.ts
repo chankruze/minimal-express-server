@@ -9,8 +9,12 @@ import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
 import helmet from 'helmet'
+import cookieparser from 'cookie-parser'
+// custom middlewares
+import { iam } from './middlewares/iam'
 // routes
-import rootRoutes from './routes'
+import authRoutes from './routes/auth'
+import userRoutes from './routes/user'
 
 class App {
   public app
@@ -27,13 +31,15 @@ class App {
       cors(),
       morgan('dev'),
       express.json(),
-      express.urlencoded({ extended: false })
+      express.urlencoded({ extended: false }),
+      cookieparser(process.env.COOKIE_SECRET)
     )
   }
 
   private mountRoutes (): void {
     // mount routes
-    this.app.use('/', rootRoutes)
+    this.app.use('/auth', authRoutes)
+    this.app.use('/user', iam(), userRoutes)
   }
 }
 

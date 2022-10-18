@@ -12,4 +12,12 @@ declare global {
   var prisma: PrismaClient
 }
 
+declare module 'jsonwebtoken' {
+  export interface JwtPayload {
+    id: string
+    email: string
+    role: string
+  }
+}
+
 export {}

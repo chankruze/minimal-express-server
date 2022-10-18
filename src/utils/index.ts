@@ -6,6 +6,8 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import os from 'os'
+import { Prisma } from '@prisma/client'
+import { Response } from 'express'
 
 export const getNetWorkUrl = () => {
   const networkInterfaces = os.networkInterfaces()
@@ -36,4 +38,30 @@ export const banner = (port) => {
   if (isDevEnv()) console.log(`└── <localhost>\thttp://localhost:${port}`)
 
   return console.log(`└── <network>\thttp://${getNetWorkUrl()}:${port}`)
+}
+
+export const makeSerializable = <T>(o: T): T => {
+  return JSON.parse(JSON.stringify(o))
+}
+
+export const handleError = (e: unknown, res: Response) => {
+  console.error(e)
+
+  if (e instanceof Prisma.PrismaClientKnownRequestError) {
+    // https://www.prisma.io/docs/reference/api-reference/error-reference#prisma-client-query-engine
+    switch (e.code) {
+      default:
+        return res.status(400).json(
+          makeSerializable({
+            message: e.message
+          })
+        )
+    }
+  }
+
+  return res.status(500).json(
+    makeSerializable({
+      message: 'something bad had happened in the server.'
+    })
+  )
 }

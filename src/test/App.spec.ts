@@ -9,24 +9,60 @@ import axios from 'axios'
 import { describe, it } from 'mocha'
 import { expect } from 'chai'
 
+const API_URL = 'http://localhost:6767'
+
 describe('App', () => {
-  it('server / should return 200', async () => {
-    const response = await axios.get('http://localhost:6767/')
+  it('server /auth/signup should create a new user', async () => {
+    const data = {
+      email: 'demo@mes.com',
+      password: 'demo'
+    }
+
+    const response = await axios.post(`${API_URL}/auth/signup`, data)
+
+    expect(response.status).to.equal(201)
+    expect(response.data.message).to.equal('successfully signed up')
+  })
+
+  it('server /auth/signin should let a user sign in', async () => {
+    const data = {
+      email: 'demo@mes.com',
+      password: 'demo'
+    }
+
+    const response = await axios.post(`${API_URL}/auth/signin`, data)
+
     expect(response.status).to.equal(200)
+    expect(response.data.message).to.equal('you are signed in successfully')
   })
 
-  it('server /random/50/50 should return only 50', async () => {
-    const response = await axios.get('http://localhost:6767/random/50/50')
-    expect(response.data.randomNo).to.equal(50)
+  it('server /auth/signin (wrong email) should give 404 not found response', async () => {
+    const data = {
+      email: 'wrong@mes.com',
+      password: 'demo'
+    }
+
+    try {
+      await axios.post(`${API_URL}/auth/signin`, data)
+    } catch (error) {
+      expect(error.response.status).to.equal(404)
+      expect(error.response.data.message).to.equal(
+        `no user exists with ${data.email}`
+      )
+    }
   })
 
-  it('server /random/4/5 should return 4 or 5', async () => {
-    const response = await axios.get('http://localhost:6767/random/4/5')
-    expect(response.data.randomNo).to.greaterThanOrEqual(4).lessThanOrEqual(5)
-  })
+  it('server /auth/signin (wrong password) should restrict a user from signing in (401 unauthorized)', async () => {
+    const data = {
+      email: 'demo@mes.com',
+      password: 'wrong'
+    }
 
-  it('server /random/20/50 should return 20 or 50', async () => {
-    const response = await axios.get('http://localhost:6767/random/20/50')
-    expect(response.data.randomNo).to.greaterThanOrEqual(20).lessThanOrEqual(50)
+    try {
+      await axios.post(`${API_URL}/auth/signin`, data)
+    } catch (error) {
+      expect(error.response.status).to.equal(401)
+      expect(error.response.data.message).to.equal('wrong password provided')
+    }
   })
 })
