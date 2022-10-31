@@ -12,7 +12,7 @@ import { banner } from './utils'
 // import env variables
 dotenv.config()
 
-let port: number = parseInt(process.env.PORT) || 6767
+let port: number = parseInt(process.env.PORT) || 4000
 
 app.listen(port, banner(port)).on('error', (err) => {
   if (err.message.includes('EADDRINUSE')) {
