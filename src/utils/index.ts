@@ -44,7 +44,7 @@ export const makeSerializable = <T>(o: T): T => {
   return JSON.parse(JSON.stringify(o))
 }
 
-export const handleError = (e: unknown, res: Response) => {
+export const handleError = (e: Error, res: Response) => {
   console.error(e)
 
   if (e instanceof Prisma.PrismaClientKnownRequestError) {
@@ -61,7 +61,7 @@ export const handleError = (e: unknown, res: Response) => {
 
   return res.status(500).json(
     makeSerializable({
-      message: 'something bad had happened in the server.'
+      message: e.message || 'something bad had happened in the server.'
     })
   )
 }
