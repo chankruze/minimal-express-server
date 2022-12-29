@@ -15,6 +15,16 @@ const router = Router()
 
 router.post('/signup', async (req: Request, res: Response) => {
   try {
+    // if the email field is empty
+    if (!req.body.email) {
+      throw new Error("Email can't be empty.")
+    }
+
+    // if the password field is empty
+    if (!req.body.password) {
+      throw new Error("Password can't be empty.")
+    }
+
     if (req.body.email && req.body.password) {
       const hashedPassword = await bcrypt.hash(req.body.password, 12)
 
@@ -37,6 +47,16 @@ router.post('/signup', async (req: Request, res: Response) => {
 
 router.post('/signin', async (req: Request, res: Response) => {
   try {
+    // if the email field is empty
+    if (!req.body.email) {
+      throw new Error("Email can't be empty.")
+    }
+
+    // if the password field is empty
+    if (!req.body.password) {
+      throw new Error("Password can't be empty.")
+    }
+
     if (req.body.email && req.body.password) {
       // check in the db if there is any user with the given email
       const user = await prisma.user.findUnique({
