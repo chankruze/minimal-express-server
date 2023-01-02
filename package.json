@@ -5,10 +5,12 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "prestart": "npm install && npm run build",
+    "prestart": "pnpm install && pnpm run build",
     "start": "cross-env NODE_ENV='production' node dist/index.js",
-    "build": "npm run lint && rimraf dist && tsc",
-    "predev": "npm run build",
+    "start:pm2": "pnpm i pm2 -g && pm2-runtime start ecosystem.config.js --env production",
+    "build": "pnpm install && pnpm run lint && rimraf dist && pnpm run build:prisma && tsc --build --verbose",
+    "build:prisma": "npx prisma db push",
+    "predev": "pnpm install && pnpm run lint && rimraf dist && pnpm run build:prisma",
     "dev": "cross-env NODE_ENV='development' concurrently \"tsc --watch\" \"nodemon dist/index.js\"",
     "lint": "eslint . --ext .ts --fix",
     "precommit": "npm run lint"
@@ -65,6 +67,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.10.0",
     "morgan": "^1.10.0",
-    "nanoid": "^4.0.0"
+    "nanoid": "^4.0.0",
+    "rimraf": "^3.0.2"
   }
 }

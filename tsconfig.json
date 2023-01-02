@@ -6,8 +6,9 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
-    "lib": ["esnext"]
+    "lib": ["esnext"],
+    "rootDir": "src"
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["dist", "src/data", "node_modules", "./src/**/*.spec.ts"]
+  "include": ["src/**/*.ts", "globals.d.ts"],
+  "exclude": ["dist", "src/test", "src/data", "src/**/*.json", "node_modules"]
 }
