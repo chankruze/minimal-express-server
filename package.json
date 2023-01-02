@@ -7,7 +7,7 @@
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
     "prestart": "pnpm install && pnpm run build",
     "start": "cross-env NODE_ENV='production' node dist/index.js",
-    "start:pm2": "pnpm i pm2 -g && pm2-runtime start ecosystem.config.js --env production",
+    "start:pm2": "pnpm i pm2 -g && pm2 restart ecosystem.config.js --env production",
     "build": "pnpm install && pnpm run lint && rimraf dist && pnpm run build:prisma && tsc --build --verbose",
     "build:prisma": "npx prisma db push",
     "predev": "pnpm install && pnpm run lint && rimraf dist && pnpm run build:prisma",
