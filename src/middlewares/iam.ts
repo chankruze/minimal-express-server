@@ -7,12 +7,13 @@ Copyright (c) geekofia 2022 and beyond
 
 import { NextFunction, Request, Response } from 'express'
 import jwt from 'jsonwebtoken'
+import config from '../config'
 
 export const iam = (options?) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       // get the jwt token
-      const token = req.signedCookies['mes-user']
+      const token = req.signedCookies[`${config.APP_NAME}_user`]
 
       // verify token  signature
       const user = <jwt.JwtPayload>jwt.verify(token, process.env.JWT_SECRET)

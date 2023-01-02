@@ -6,10 +6,10 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import { Request, Response, Router } from 'express'
-import prisma from '../lib/prisma'
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import { handleError } from '../utils'
+import prisma from '../lib/prisma'
+import config from '../config'
+import { generateJWT, handleError, isProd } from '../utils'
 
 const router = Router()
 
@@ -83,25 +83,15 @@ router.post('/signin', async (req: Request, res: Response) => {
       }
 
       // create the jwt token
-      const token = jwt.sign(
-        {
-          id: user.id,
-          email: user.email,
-          role: user.role
-        },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: 1000 * 60 * 10
-        }
-      )
+      const token = generateJWT(user)
 
       // attach the jwt token to the response cookie
       res
-        .cookie('mes-user', token, {
+        .cookie(`${config.APP_NAME}_user`, token, {
           maxAge: 1000 * 60 * 10,
           httpOnly: true,
           signed: true,
-          secure: process.env.NODE_ENV === 'production'
+          secure: isProd()
         })
         .json({
           message: 'you are signed in successfully'
